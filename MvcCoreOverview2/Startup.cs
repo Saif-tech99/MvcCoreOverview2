@@ -26,9 +26,17 @@ namespace MvcCoreOverview2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //services.AddDbContext<BookContext>(); // *solution1 this comes from the class BookContext 
+
+            // services.AddDbContext<BookContext>(options =>
+            //options.UseSqlServer("Server=LAPTOP-MTGLS0HR\\SQLEXPRESS;Database=BooksEF;Integrated Security=True;")
+            //); // *solution2 this used if there was no Json file, no need for the code in the BookContext class from the solution1 and no need for jeson strings
+
             services.AddDbContext<BookContext>(options =>
-      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-      );
+             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+      ); // *solution3 this is from the Json file use this if you want to use Jison string after writeing the Jison string only this code is needed
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
