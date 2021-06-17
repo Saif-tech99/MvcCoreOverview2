@@ -25,7 +25,7 @@ namespace MVCEFCoreOverview.Data
             modelBuilder.Entity<BookAuthor>().HasKey(b => new { b.Books_Id, b.Author_Id });
         }
 
-        // use this code if you don't want to use Json stirngs solution1 - int startup
+        // use this code if you don't want to use Json stirngs solution1 - in startup
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseSqlServer("Server=LAPTOP-MTGLS0HR\\SQLEXPRESS;Database=BooksEF;Integrated Security=True;");
