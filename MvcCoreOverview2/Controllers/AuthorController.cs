@@ -19,26 +19,28 @@ namespace MvcCoreOverview2.Controllers
 
         public IActionResult Index()
         {
-            //IEnumerable<Authors> lst = _db.Authors;
-            List<Authors> lst = _db.Authors.ToList();
+            IEnumerable<Authors> lst = _db.Authors;
+            //List<Authors> lst = _db.Authors.ToList();
             return View(lst);
         }
 
 
         [HttpGet]
-        public IActionResult AddAuthor()
+        [ValidateAntiForgeryToken]
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddAuthor(Authors authors)
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Create(Authors authors)
         {
             if (ModelState.IsValid)
             {
-                _db.Add(authors);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                _db.Authors.Add(authors);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(authors);
         }
